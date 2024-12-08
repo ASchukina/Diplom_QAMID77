@@ -26,6 +26,8 @@ public class ControlPanelNews {
     CreateNews createNews = new CreateNews();
     EditNews editNews = new EditNews();
     FilterNews filterNews = new FilterNews();
+
+    // Объявление идентификаторов кнопок
     private final int buttonAddNews = R.id.add_news_image_view;
     private final int buttonEditNews = R.id.edit_news_item_image_view;
     private final int buttonDeleteNews = R.id.delete_news_item_image_view;

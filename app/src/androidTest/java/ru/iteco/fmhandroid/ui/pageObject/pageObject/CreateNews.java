@@ -82,7 +82,6 @@ public class CreateNews {
     @Step("Проверка, что осталась открыта форма 'Создания новости'")
     public void verifyNewsCreationFormDisplayed() {
         Allure.step("Проверка, что форма создания новости осталась отображена");
-        ViewInteraction viewGroup = onView(withId(containerCreateEditNews));
-        viewGroup.check(matches(isDisplayed()));
+        onView(withId(containerCreateEditNews)).check(matches(isDisplayed()));
     }
 }

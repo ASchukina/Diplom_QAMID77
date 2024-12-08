@@ -1,8 +1,12 @@
 package ru.iteco.fmhandroid.ui.pageObject.tests;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import androidx.test.espresso.Espresso;
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
@@ -16,6 +20,7 @@ import java.util.List;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.pageObject.Utils;
 import ru.iteco.fmhandroid.ui.pageObject.pageObject.AppBar;
@@ -42,7 +47,7 @@ public class FilterNewsTest {
 
     @Before
     public void setUp() {
-        Espresso.onView(isRoot()).perform(Utils.waitDisplayed(appBar.getAppBarFragmentMain(), 5000));
+        onView(isRoot()).perform(Utils.waitDisplayed(appBar.getAppBarFragmentMain(), 5000));
         if (!mainPage.isDisplayedButtonProfile()) {
             authorizationPage.successfulAuthorization();
         }
@@ -173,7 +178,7 @@ public class FilterNewsTest {
         filterNews.setDateFromFilter(Utils.dateMore1Month());
         filterNews.setDateToFilter(Utils.dateInPast());
         filterNews.confirmFilter();
-        filterNews.checkErrorFilterNews("Не верно указан период");
+        filterNews.checkErrorFilterNews("Неверно указан период");
     }
 
     @Description("Отмена фильтрации после заполнения формы с помощью кнопки 'Отмена'")

@@ -19,6 +19,7 @@ import static ru.iteco.fmhandroid.ui.pageObject.Utils.waitDisplayed;
 import android.view.View;
 
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.assertion.ViewAssertions;
 
 import org.hamcrest.core.IsInstanceOf;
 
@@ -28,6 +29,7 @@ import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.pageObject.Utils;
 
 public class FilterNews {
+    // Поля для поиска элементов
     private final ViewInteraction category = onView(withId(R.id.news_item_category_text_auto_complete_text_view));
     private final ViewInteraction dataFrom = onView(withId(R.id.news_item_publish_date_start_text_input_edit_text));
     private final ViewInteraction dataTo = onView(withId(R.id.news_item_publish_date_end_text_input_edit_text));
@@ -35,10 +37,12 @@ public class FilterNews {
     private final ViewInteraction checkBoxNotActive = onView(withId(R.id.filter_news_inactive_material_check_box));
     private final ViewInteraction buttonFilter = onView(withId(R.id.filter_button));
     private final ViewInteraction buttonCancel = onView(withId(R.id.cancel_button));
+    // private final ViewInteraction message = onView(withId(android.R.id.message));
     private final int cancel = R.id.cancel_button;
     private final int filter = R.id.filter_button;
     private final int buttonFilterNews = R.id.filter_news_material_button;
 
+    // ID элементов
     private final int element = R.id.empty_news_list_text_view;
 
     private final int message = android.R.id.message;
@@ -92,7 +96,7 @@ public class FilterNews {
 
     @Step("Отмена фильтрации")
     public void cancelFilter() {
-        Allure.step("Нажать на кнопку 'Отменить");
+        Allure.step("Нажать на кнопку 'Отменить'");
         onView(isRoot()).perform(waitDisplayed(cancel, 10000));
         buttonCancel.check(matches(isDisplayed()));
         buttonCancel.perform(click());
@@ -102,9 +106,8 @@ public class FilterNews {
     public void checkErrorFilterNews(String text) {
         Allure.step("Проверка отображения ошибки");
         onView(isRoot()).perform(Utils.waitDisplayed(message, 10000));
-        ViewInteraction textView = onView(allOf(withId(message), withText(text),
-                        isDisplayed()));
-        textView.check(matches(withText(text)));
+        onView(allOf(withId(message), withText(text), isDisplayed()))
+                .check(matches(withText(text)));
     }
 
     @Step("Проверка видимости элемента с текстом 'Здесь пока ничего нет'")
